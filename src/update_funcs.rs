@@ -170,3 +170,33 @@ pub fn update_oil(api: &mut CellApi) {
         api.set(dx, 0, cell); 
     }  
 }
+
+pub fn update_steam(api: &mut CellApi) {
+    let mut rng = thread_rng();
+    let cell = api.get(0, 0);
+    let dx = rand_dir();
+    let rand_val = rng.gen_bool(1.0 / 4.0);
+
+    let neighbor = api.get(0, -1);
+    
+    //hier noch density check implementieren grad zu faul
+    if neighbor == EMPTY_CELL { 
+        //her wird oft kopiert iwie ändern 
+        if !rand_val {
+            api.set(0, 0, EMPTY_CELL);
+            api.set(dx, -1, cell);
+        }
+        else {
+            api.set(0, 0, EMPTY_CELL);
+            api.set(0, -1, cell);
+        }
+    }
+    else if api.get(dx, -1) == EMPTY_CELL {
+        api.set(0, 0, api.get(dx, -1));
+        api.set(dx, -1, cell);
+    }
+    else if api.get(dx, 0) == EMPTY_CELL {
+        api.set(0, 0, api.get(dx, 0));
+        api.set(dx, 0, cell);
+    }
+}

@@ -3,9 +3,9 @@ use rand::{thread_rng, Rng};
 use num_derive::FromPrimitive;    
 use num_traits::FromPrimitive;
 
-pub const MAP_HEIGHT: i32 = 200;
-pub const MAP_WIDTH: i32 = 200;
-pub const CELL_SIZE: i32 = 2;
+pub const MAP_HEIGHT: i32 = 400;
+pub const MAP_WIDTH: i32 = 400;
+pub const CELL_SIZE: i32 = 1;
 
 pub const EMPTY_CELL: Cell = Cell {
     species: Species::Empty,
@@ -69,6 +69,7 @@ pub enum Species {
     Wood,
     Fire,
     Oil,
+    Steam,
 }
 
 impl Species {
@@ -96,6 +97,7 @@ impl Species {
         match self {
             Species::Empty => 0,
             Species::Fire => 1,
+            Species::Steam => 5,
             Species::Oil => 20,
             Species::Water => 50,
             Species::Sand => 100,

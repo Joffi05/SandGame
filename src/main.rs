@@ -40,6 +40,7 @@ fn draw_map(canvas: &mut WindowCanvas, api: &CellApi) {
                 Species::Wood => { if cell.ra == 30 {canvas.set_draw_color(Color::RGB(101, 67, 33))} else {canvas.set_draw_color(Color::RGB(255, 100, 50))}},
                 Species::Fire => canvas.set_draw_color(Color::RGB(255 - cell.ra * 10, 100 - cell.ra * 6, 50 - cell.ra * 3)),
                 Species::Oil => canvas.set_draw_color(Color::RGB(5, 5, 5)),
+                Species::Steam => canvas.set_draw_color(Color::RGB(150, 150, 234)),
             }
             canvas.fill_rect(sdl2::rect::Rect::new((x * CELL_SIZE) as i32 + 100, (y * CELL_SIZE) as i32 + 100, CELL_SIZE as u32, CELL_SIZE as u32)).expect("Couldnt draw cell");
         }
@@ -67,6 +68,7 @@ fn update_map(api: &mut CellApi) {
                     Species::Wood => update_wood(api),
                     Species::Fire => update_fire(api),
                     Species::Oil => update_oil(api),
+                    Species::Steam => update_steam(api),
                 }
             }   
         }
